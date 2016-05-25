@@ -1,0 +1,56 @@
+# Reactive Programming
+
+Before entering the topic of this chapter, let's have a look at the solution to Exercise 6.
+
+The `ui.R`:
+
+```{r, eval=FALSE}
+library(shiny)
+shinyUI(fluidPage(
+  sidebarLayout(
+    sidebarPanel(
+       sliderInput("nrows",
+                   "Number of rows:",
+                   min = 1,
+                   max = 50,
+                   value = 10)
+    ),
+    mainPanel(
+       plotOutput("carsPlot"),
+       tableOutput("carsTable")
+    )
+  )
+))
+```
+
+The `server.R`:
+
+```{r, eval=FALSE}
+library(shiny)
+shinyServer(function(input, output) {
+  output$carsPlot <- renderPlot({
+    plot(head(cars, input$nrows))
+  })
+  output$carsTable <- renderTable({
+    head(cars, input$nrows)
+  })
+})
+
+```
+
+The solution given above works, but not perfect. A better solution would be:
+
+```{r, eval=FALSE}
+shinyServer(function(input, output) {
+  df <- reactive({
+    head(cars, input$nrows)
+  })
+  output$plot <- renderPlot({
+    plot(df())
+  })
+  output$table <- renderTable({
+    df()
+  })
+})
+```
+

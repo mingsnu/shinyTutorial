@@ -1,0 +1,90 @@
+# Introduction {#intro}
+
+## Web development
+
+Here are some concepts that usually used in web development. Knowing them might make you look like more professional:sunglasses:
+
+**Static web page**
+
+> A static web page (sometimes called a flat page/stationary page) is a web page that is delivered to the user exactly as stored. (from [wiki](https://en.wikipedia.org/wiki/Static_web_page))
+
+```{r static-page, fig.cap='Static web page: is delivered to the user exactly as stored.', echo=FALSE}
+knitr::include_graphics('imgs/Scheme_static_page_en.svg')
+```
+
+**Dynamic web page**
+
+> A server-side dynamic web page is a web page whose construction is controlled by an application server processing server-side scripts. (from [wiki](https://en.wikipedia.org/wiki/Dynamic_web_page))
+
+```{r dynamic-page, fig.cap='Dynamic web page: example of server-side scripting (PHP and MySQL).', echo=FALSE}
+knitr::include_graphics('imgs/Scheme_dynamic_page_en.svg')
+```
+
+**Web application** 
+
+> A Web application (Web app) is an application program that is stored on a remote server and delivered over the Internet through a browser interface. (from [WhatIs.com](searchsoftwarequality.techtarget.com/definition/Web-application-Web-app))
+
+
+**Web (application) framework** 
+
+> A Web framework is a collection of packages or modules which allow developers to write Web applications or services without having to handle such low-level details as protocols, sockets or process/thread management. (from [PythonWiki](https://wiki.python.org/moin/WebFrameworks))
+
+**Front-end web development** 
+
+> Front-end web development, also known as client-side development is the practice of producing HTML, CSS and JavaScript for a website or web application so that a user can see and interact with them directly. (from [Wiki](https://en.wikipedia.org/wiki/Front-end_web_development))
+
+**Back-end web development** 
+
+> Back-end web development creates the logical back-end and core computational logic of a website. (from [techopedia](https://www.techopedia.com/definition/29568/back-end-developer))
+
+## Shiny
+
+[Shiny](http://shiny.rstudio.com/)  is a web application framework for R that can help turn your analyses into interactive web applications.
+
+- No HTML, CSS, or JavaScript knowledge required
+
+**Why Shiny?**
+
+- Easy to learn, easy to use.
+- The development time is minimized.
+- Excellent tool for data visualization.
+- Have very strong backing: the R language
+- Fun & Cool.
+
+A **Shiny app** usually contains two parts:
+
+1. UI: controls the outlook of the web page
+2. Server: (a live R session) controls the logic
+
+**How does Shiny app work?**
+
+The "Server" keeps monitoring the UI. Whenever there is a change in the UI, the "Server" will follow some instructions (run some R code) accordingly and update the UI's display. (This is the basic idea of **reactive** expression, which is an distinguish feature of Shiny we will talk about later.)
+
+**Example**
+
+```{r eg1, eval=FALSE}
+library(shiny)
+runExample("01_hello") # a histogram
+```
+
+In the example above, the "Server" keeps monitoring the "slider" in the page, and whenever there is a change with it, the "Server" will re-execute a block of R code to regenerate the hitogram.
+
+## Resources
+
+1. Shiny portal site: <http://shiny.rstudio.com>
+  - Tutorial (get started): <http://shiny.rstudio.com/tutorial/>
+  - Articles (go deeper): <http://shiny.rstudio.com/articles/>
+  - Gallery (get inspired): <http://shiny.rstudio.com/gallery/>
+2. Shiny User Showcase: <https://www.rstudio.com/products/shiny/shiny-user-showcase/>
+  - Shiny Apps for the Enterprise
+  - Industry Specific Shiny Apps
+  - Shiny Apps as Analytics Tools
+  - Shiny Apps that Extend Shiny
+  - Shiny Apps with Popular Appeal
+  - Shiny Apps for Teaching
+3. Shiny examples (over 100 examples): <https://github.com/rstudio/shiny-examples>
+4. Ask questions in the shiny google group: <https://groups.google.com/forum/#!forum/shiny-discuss>
+5. Articles from R blogger: <http://www.r-bloggers.com/?s=shiny>
+6. Gallery of user-made apps: <http://www.showmeshiny.com/>
+7. 2016 Shiny Developer Conference Videos <https://www.rstudio.com/resources/webinars/shiny-developer-conference/>
+

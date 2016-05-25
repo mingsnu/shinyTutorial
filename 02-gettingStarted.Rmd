@@ -1,0 +1,321 @@
+# Getting started
+
+In this section we'll walk through the steps of building a simple shiny application.
+
+## Structure of a Shiny App
+
+A simple shiny app is a directory containing two `R` scripts, one is `ui.R`, which controls the layout and appearance of your app, the other is `server.R`, which contains the instructions that your computer needs to build your app. Note that the names for the scripts are fixed, you should **NOT** use other names.
+
+**Exercise 1: App template**
+
+Let's create a new directory named `01-hello` (or whatever you like) and then create two empty `ui.R` and `server.R` files within it.
+
+Open `ui.R` with any editor you want and put the following code in it:
+
+```{r, eval=FALSE}
+library(shiny)
+fluidPage()
+```
+
+Then copy the following code to `server.R`. Note that the `server.R` contains one single unnamed function.
+
+```{r, eval=FALSE}
+library(shiny)
+function(input, output) {
+}
+```
+
+```{block, note, type='rmdnote'}
+For historical reasons, usually `shinyUI` and `shinyServer` functions are used to wrap the UI and server side scripts, but it is no longer required as of Shiny 0.10.
+```
+
+To run the app, 
+
+1. you can switch the R working directory to the directory above `01-hello` and run
+
+```{r, eval=FALSE}
+library(shiny)
+runApp('01-hello')
+```
+
+2. or you can switch the R working directory to `01-hello` and run 
+
+```{r, eval=FALSE}
+library(shiny)
+runApp()
+```
+
+3. just click the `Run App` button if you use `Rstudio` (**Recommended**)
+
+After running the app, you'll get an empty web page.
+
+
+**Single-file Shiny App**
+
+As the name implied, a single-file shiny app consists of a single file called `app.R` which contains both the server and UI components. As an example, we can rewrite *Exercise 1* into a single-file shiny app with the following code in the `app.R` file:
+
+```{r, eval=FALSE}
+library(shiny)
+ui <- fluidPage()
+server <- function(input, output){}
+shinyApp(ui = ui, server = server)
+```
+
+## UI
+
+UI is de facto an HTML file.
+
+In building `ui.R` file, what we really do is to construct an HTML file with R functions. To see so by typing `fluidPage()` in the R console and you'll see this function returns an HTML div tag `<div class="container-fluid"></div>`.
+So of course you can [build your entire UI with HTML](http://shiny.rstudio.com/articles/html-ui.html).
+
+By default, Shiny uses [bootstrap](http://getbootstrap.com/)(has nothing to do with `bootstrap` method in statistics), the most popular HTML, CSS, and JS framework for developing responsive, mobile first projects on the web.
+
+### HTML tags
+
+> shiny::tags is a list of 110 functions. Each function builds a specific HTML tag. If you are familiar with HTML, you will recognize these tags by their names.
+
+You can build UI by using HTML tags. Use `names(tags)` to see all available tags. For more information please look at [Customize your UI with HTML](http://shiny.rstudio.com/articles/html-tags.html).
+
+**Exercise 2: adding HTML tags**
+
+Modify `ui.R` in `01-hello` folder as follows and run the App again:
+
+```{r, eval=FALSE}
+library(shiny)
+fluidPage(
+  tags$div(
+    h1("Hello Shiny!"),
+    hr(),
+    p(strong("bold font "), em("italic font")),
+    p(code("code block")),
+    a(href="http://www.google.com", "link to Google"),
+    HTML('<p>
+         <label>A numeric input:</label><br /> 
+         <input type="number" name="n" value="7" min="1" max="30" />
+         </p>')
+    )
+  )
+```
+
+Note that most commonly used tags (like `h1`, `p`, `a`, etc in example above) have wrapper functions, so you do not need to prefix their names with `tags$`.
+
+### Layout
+
+Shiny implemented the layout features availabe in Bootstrap. You can speed up your development by choosing appropriate layout style.
+
+**Panels**
+
+Panel functions are used to put a group of elements together into a single 'panel'.
+
+There are several `panel` functions defined in `shiny`:
+
+    absolutePanel()
+    conditionalPanel()
+    fixedPanel()
+    headerPanel()
+    inputPanel()
+    mainPanel()
+    navlistPanel()
+    sidebarPanel()
+    tabPanel()
+    tabsetPanel()
+    titlePanel()
+    wellPanel()
+
+Most of the `panel` functions return `div` tags with some class attributes defined in Bootstrap. For example, if you type `wellPanel` in the R console, you'll get `<div class="well"></div>`, which is the [`well`](http://www.w3schools.com/bootstrap/bootstrap_wells.asp) class in Bootstrap.
+
+**Layouts**
+
+Layout functions are used to organize panels and elements into an existing layout.
+
+There are several `layout` functions defined in `shiny`:
+
+- `fluidRow()`, `column()`: based on the bootstrap [grid system] (http://v4-alpha.getbootstrap.com/layout/grid/).  See `?fluidRow` for more details.
+- `flowLayout()`: Lays out elements in a left-to-right, top-to-bottom arrangement.
+- `sidebarLayout()`: Create a layout with a sidebar and main area. (Most commonly used layout.)
+- `splitLayout()`: Lays out elements horizontally, dividing the available horizontal space into equal parts (by default).
+- `verticalLayout()`: Create a container that includes one or more rows of content.
+
+Figure \@ref(layout) gives a graphical demenstration.
+
+```{r layout, fig.cap='Shiny UI layouts', echo=FALSE}
+knitr::include_graphics('images/layout.png')
+```
+
+For more details please look at [Application layout guide](http://shiny.rstudio.com/articles/layout-guide.html)
+
+------
+
+`sidebarLayout` is perhaps the most useful layout. We'll take it as example here to show the usage of UI layout functions.
+
+See the help document of the `sidebarLayout` function for detail: `?sidebarLayout`
+
+**Exercise 3: sidebarLayout**
+
+Modify `ui.R` in `01-hello` folder as follows and run the App again:
+
+```{r, eval=FALSE}
+library(shiny)
+fluidPage(
+  titlePanel("Hello Shiny!"),
+  sidebarLayout(
+    sidebarPanel(HTML('<p>
+         <label>A numeric input:</label><br /> 
+         <input type="number" name="n" value="7" min="1" max="30" />
+         </p>')),
+    mainPanel(
+      p(strong("bold font "), em("italic font")),
+      p(code("code block")),
+      a(href="http://www.google.com", "link to Google"))
+  )
+)
+```
+
+### Inputs (control widgets)
+
+Wigets are web elements that users can interact with. Widgets provide a way for your users to send messages to the Shiny app. Shiny widgets collect values from the user. When a user changes the widget, the value will change as well.
+
+In Exercise 3, we used HTML code to add a numeric input (a kind of 'widget') to the sidebar panel, but over using HTML code will make the code quite messy and hard to manage for large projects. Shiny comes with a family of pre-built widgets, each created with a transparently named R function, which makes the widgets easier to create and look better(using bootstrap style).
+
+The standard Shiny widgets are:
+
+**function** |	**widget**
+------------- | ----------------------------
+actionButton |	Action Button
+checkboxGroupInput |	A group of check boxes
+checkboxInput |	A single check box
+dateInput |	A calendar to aid date selection
+dateRangeInput |	A pair of calendars for selecting a date range
+fileInput |	A file upload control wizard
+helpText |	Help text that can be added to an input form
+numericInput |	A field to enter numbers
+radioButtons |	A set of radio buttons
+selectInput |	A box with choices to select from
+sliderInput |	A slider bar
+submitButton |	A submit button
+textInput |	A field to enter text
+
+Figure \@ref(widgets) gives a graphical demenstration.
+
+```{r widgets, fig.cap='Control Widgets.', echo=FALSE}
+knitr::include_graphics('images/widgets.png')
+```
+
+See examples of widgets: <http://shiny.rstudio.com/gallery/widget-gallery.html>
+
+**Adding widgets**
+
+Each widget function requires several arguments. The first two arguments for each widget are
+
+- **A Name for the widget**. The user will not see this name, but you can use it to access the widget’s value. The name should be a character string.
+
+- **A label**. This label will appear with the widget in your app. It should be a character string, but it can be an empty string "".
+
+The remaining arguments vary from widget to widget, depending on what the widget needs to do its job. 
+Now let's improve our example by using `numericInput` instead of HTML code.
+
+**Exercise 4: widgets**
+
+Modify `ui.R` in `01-hello` folder as follows and run the App again:
+
+```{r, eval=FALSE}
+library(shiny)
+fluidPage(
+  titlePanel("Hello Shiny!"),
+  sidebarLayout(
+    sidebarPanel(
+      numericInput("numInput", "A numeric input:", value = 7, min = 1, max = 30)
+    ),
+    mainPanel(
+      p(strong("bold font "), em("italic font")),
+      p(code("code block")),
+      a(href="http://www.google.com", "link to Google"))
+  )
+)
+```
+
+## Server
+
+### Output
+
+Now we want to build our output, which will be updated automatically when an input widget changes.
+
+For example, we want to build an app with a numeric input in the sidebar panel controls the 'radius' of a circle, and a text output in the main panel showing the area of the circle based on the radius input. We want the text output can be updated automatically when the radius value changes.
+
+Two steps to do that:
+
+1. Register your output object in `ui.R`. That is tell UI **where** to put the text output (outlook). 
+2. Tell Shiny how to render the output in `server.R`. That is tell the server **how** to render the text (logic).
+
+**Exercise 5: output**
+
+Modify `ui.R` in `01-hello` folder as follows. It is saying that I want to put a text output object in the main panel.
+
+```{r, eval=FALSE}
+library(shiny)
+fluidPage(
+  titlePanel("Hello Shiny!"),
+  sidebarLayout(
+    sidebarPanel(
+      numericInput("numInput", "A numeric input:", value = 7, min = 1, max = 30)
+    ),
+    mainPanel(
+      textOutput("txtOutput")
+    )
+  )
+)
+```
+
+Modify `server.R` in `01-hello` folder as follows. It gives the instruction of how to calcuate the area of a circle and what text to print. 
+
+```{r, eval=FALSE}
+library(shiny)
+function(input, output) {
+  output$txtOutput = renderText({
+    paste0("The area of the circle is: ", pi*input$numInput^2)
+  })
+}
+```
+
+Now let's run the app in `showcase` mode by calling `runApp(display.mode = "showcase")`. 
+
+Show case mode will show application code and metadata from a `DESCRIPTION` file in the application directory alongside the application. Shiny showcase will highlight lines of code in `server.R` as it runs them. The highlight will appear in yellow and fade out after a few moments. This helps reveal how Shiny creates **reactivity**; when your user manipulates an app, Shiny reruns parts of `server.R` to create updated output.
+
+- The unnamed function in `server.R` plays a special role in the Shiny process. The function has two arguments, `input` and `output`, both of them are list-like objects.  The `input` stores the current values of all of the widgets in your app. These values will be saved under the names same as the `inputId` of the widgets in `ui.R`. The `output` contains all of the code needed to update the R objects in your app.
+
+- Shiny will automatically make an object **reactive** if the object uses an input value.
+
+In the example above, we used `textOutput` to register a text output object in `ui.R` and then used `renderText` function to render it. There are many other pairs of `*Output` and `render*` functions defined in Shiny and they work together to add R output to the UI.
+
+Output function | render function	 | creates
+----------------|------------------|------------------------------
+htmlOutput/uiOutput | renderUI |	a Shiny tag object or HTML
+imageOutput |	renderImage	| images (saved as a link to a source file)
+plotOutput | renderPlot |	plots
+tableOutput |	renderTable	| data frame, matrix, other table like structures
+textOutput | renderText |	character strings
+verbatimTextOutput | renderPrint	| any printed output
+
+Figure \@ref(output) gives a graphical demenstration.
+
+```{r output, fig.cap='Shiny `render*` and `*Output` functions', echo=FALSE}
+knitr::include_graphics('images/outputs.png')
+```
+
+### Summary practice
+
+**Exercise 6: A summary of what we have learned**
+
+Create a shiny app named '02-cars' with the following requirements:
+1. Layout: sidebar layout.
+2. A slider in the sidebar panel with `inputId` "nrows" and `label` "Number of rows:", which controls how many rows of the data set `datasets::cars` to use in the following analysis. The minimum value is 1, maximum value is 50 and default value is 10.
+3. In the main panel, create a scatterplot with `x` axis `speed` and `y` axis `dist` on the top and a table showing the data on the bottom, using `outputId` "carsPlot" and "carsTable" respectively.
+
+Solution will be given in next section.
+
+```{block, tip1, type='rmdtip'}
+Some people get confused about when to use `,` and when should not use. Actually it is quite easy to remember: when your component is as an argument to a function, you should use `,`, otherwise don't use comma. For example, you put several components inside a `fluidRow`, then you should separate the components by using comma; you put some expression inside `function(input, output){}` in the `server.R` file, then you don't need comma to seperate them as they are in the body of a function.
+```
+
+
+

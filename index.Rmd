@@ -1,0 +1,35 @@
+--- 
+title: "Shiny Tutorial"
+author: "Weicheng Zhu"
+date: "`r Sys.Date()`"
+knit: "bookdown::render_book"
+documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+site: bookdown::bookdown_site
+description: "This is a shiny tutorial."
+---
+
+# Prerequisites
+
+Some basic knowlege about the R lanuage is requred.
+
+It would be helpful if you have some basic knowlege about HTML, CSS and javascript, but they are not required.
+
+## Softwares
+- [R](https://www.r-project.org/). Better to use the latest version of R (3.3.0 for the time this tutorial is written).
+- [Rstudio](https://www.rstudio.com/products/rstudio/download/). A user friendly IDE for R. Very convenient tool in building shiny apps.
+- Web browser. Better to use google chrome or firefox.
+
+## R packages
+- `shiny`
+- `shinydashboard`
+- `plotly`
+
+```{r include=FALSE}
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+), 'packages.bib')
+```
