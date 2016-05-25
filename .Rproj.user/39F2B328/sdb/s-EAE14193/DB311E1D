@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "book_filename: \"shinyTutorial\"\nchapter_name: \"Chapter \"\nrepo: https://github.com/rstudio/bookdown/\noutput_dir: _book\nclean: [packages.bib, bookdown.bbl]\n",
+    "created" : 1464204232194.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1067835087",
+    "id" : "DB311E1D",
+    "lastKnownWriteTime" : 1464204294,
+    "last_content_update" : 1464204294715,
+    "path" : "~/shinyTutorial/_bookdown.yml",
+    "project_path" : "_bookdown.yml",
+    "properties" : {
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "yaml"
+}
