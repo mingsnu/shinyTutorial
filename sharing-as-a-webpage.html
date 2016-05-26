@@ -33,8 +33,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="softwares.html">
-<link rel="next" href="web-development.html">
+<link rel="prev" href="sharing-as-r-files.html">
+<link rel="next" href="tips.html">
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -158,17 +158,63 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="intro" class="section level1">
-<h1><span class="header-section-number">Chapter 2</span> Introduction</h1>
-<p>In this section, we’ll start with some basic concepts of web development and then introduce Shiny by explaining the advantages of Shiny and how it works. At last we’ll give a list of useful resources in learning Shiny.</p> 
+<div id="sharing-as-a-webpage" class="section level2">
+<h2><span class="header-section-number">7.2</span> Sharing as a webpage</h2>
+<div id="for-temporary-uses" class="section level3">
+<h3><span class="header-section-number">7.2.1</span> For temporary uses</h3>
+<p>Say I have a Shiny app on my desktop in my office and I’ll have a meeting in a conference room somewhere in my department. It might be a good choice to host the Shiny app temporarily on my desktop.</p>
+<ol style="list-style-type: decimal">
+<li>Find out your IP address. To access your app from other computer, you need to know your IP address. For Windows system, use <code>ipconfig</code> command in Command Prompt (<code>Win</code>+ R, then input <code>cmd</code> and Enter) . In linux, use <code>ifcondig</code> instead. Remember your IP4 Address, for example, mine is <code>10.26.52.173</code> as shown in Figure <a href="sharing-as-a-webpage.html#fig:ip">7.1</a>.</li>
+</ol>
+<div class="figure" style="text-align: center"><span id="fig:ip"></span>
+<img src="images/ip.png" alt="The IP address" width="70%" />
+<p class="caption">
+Figure 7.1: The IP address
+</p>
 </div>
+<ol start="2" style="list-style-type: decimal">
+<li>Run the following command on the machine hosting the Shiny app.</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">runApp</span>(<span class="dt">host =</span> <span class="st">&quot;0.0.0.0&quot;</span>, <span class="dt">port =</span> <span class="dv">80</span>)</code></pre></div>
+<div class="rmdnote">
+<p>
+The default value of <code>host</code> is <code>127.0.0.1</code> (localhost) which means that only the current machine can access it. To allow other clients to connect, <code>host</code> need to be set to <code>0.0.0.0</code>.
+</p>
+</div>
+<ol start="3" style="list-style-type: decimal">
+<li>Now you can access the Shiny app by typing the IP address in your browser from other machines.</li>
+</ol>
+<div class="rmdnote">
+<p>
+My IP address starts from <code>10</code>, which means it is a private IP, so only people using the same private network as me can access it. Private IP usually have the following ranges:
+</p>
+<pre><code>192.168.0.0 - 192.168.255.255 (65,536 IP addresses)
+172.16.0.0 - 172.31.255.255 (1,048,576 IP addresses)
+10.0.0.0 - 10.255.255.255 (16,777,216 IP addresses)</code></pre>
+<p>
+If your IP is not a private IP, anybody using the Internet may have access to your Shiny app. You may consult the IT department of your organization for details.
+</p>
+</div>
+</div>
+<div id="for-long-term-uses" class="section level3">
+<h3><span class="header-section-number">7.2.2</span> For long term uses</h3>
+<ul>
+<li><p>Using <a href="http://www.shinyapps.io/">shinyapps.io</a>, the Rstudio’s hosting service for Shiny apps.</p></li>
+<li>Building your own <a href="https://www.rstudio.com/products/shiny/shiny-server/">Shiny Server</a>.</li>
+<li>Need a linux server</li>
+<li><p>Open source edition (free) and Pro edition (advanced features)</p></li>
+</ul>
+
+</div>
+</div>
+<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-<a href="softwares.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="web-development.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+<a href="sharing-as-r-files.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="tips.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
 
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
@@ -195,7 +241,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/mingsnu/shinyTutorial/edit/master/01-intro.Rmd",
+"link": "https://github.com/mingsnu/shinyTutorial/edit/master/06-deploy.Rmd",
 "text": "Edit"
 },
 "download": ["shinyTutorial.pdf"],
