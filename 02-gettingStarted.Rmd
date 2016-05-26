@@ -4,9 +4,11 @@ In this section we'll walk through the steps of building a simple shiny applicat
 
 ## Structure of a Shiny App
 
+### Two files Shiny app
+
 A simple shiny app is a directory containing two `R` scripts, one is `ui.R`, which controls the layout and appearance of your app, the other is `server.R`, which contains the instructions that your computer needs to build your app. Note that the names for the scripts are fixed, you should **NOT** use other names.
 
-**Exercise 1: App template**
+**Exercise 1: App template (Manually)**
 
 Let's create a new directory named `01-hello` (or whatever you like) and then create two empty `ui.R` and `server.R` files within it.
 
@@ -29,28 +31,34 @@ function(input, output) {
 For historical reasons, usually `shinyUI` and `shinyServer` functions are used to wrap the UI and server side scripts, but it is no longer required as of Shiny 0.10.
 ```
 
-To run the app, 
+To run the app, open an `R` session and load the `shiny` package, then run the `runApp` function by
 
-1. you can switch the R working directory to the directory above `01-hello` and run
+1. giving the path to the app (change `path/to/01-hello` accordingly):
 
-```{r, eval=FALSE}
-library(shiny)
-runApp('01-hello')
-```
+    ```{r, eval=FALSE}
+    library(shiny)
+    runApp('path/to/01-hello') # or use 'path\\to\\01-hello'
+    ```
 
-2. or you can switch the R working directory to `01-hello` and run 
+2. or you can switch the R working directory into the app folder (by using R command `setwd("path/to/01-hello")`) and run 
 
-```{r, eval=FALSE}
-library(shiny)
-runApp()
-```
+    ```{r, eval=FALSE}
+    library(shiny)
+    runApp()
+    ```
 
-3. just click the `Run App` button if you use `Rstudio` (**Recommended**)
+**Exercise 1: App template (Using Rstudio)**
+
+It is much easier to develop a Shiny app using Rstudio:
+
+0. (Optional) In Rstudio, File -> New Project...
+1. New file -> Shiny Web App...
+2. Modify the default template
+3. Click 'Run App'.
 
 After running the app, you'll get an empty web page.
 
-
-**Single-file Shiny App**
+### Single-file Shiny App
 
 As the name implied, a single-file shiny app consists of a single file called `app.R` which contains both the server and UI components. As an example, we can rewrite *Exercise 1* into a single-file shiny app with the following code in the `app.R` file:
 
@@ -136,9 +144,9 @@ There are several `layout` functions defined in `shiny`:
 - `splitLayout()`: Lays out elements horizontally, dividing the available horizontal space into equal parts (by default).
 - `verticalLayout()`: Create a container that includes one or more rows of content.
 
-Figure \@ref(layout) gives a graphical demenstration.
+Figure \@ref(fig:layout) gives a graphical demenstration.
 
-```{r layout, fig.cap='Shiny UI layouts', echo=FALSE}
+```{r layout, fig.cap='Shiny UI layouts', echo=FALSE, out.width='80%'}
 knitr::include_graphics('images/layout.png')
 ```
 
@@ -195,7 +203,7 @@ sliderInput |	A slider bar
 submitButton |	A submit button
 textInput |	A field to enter text
 
-Figure \@ref(widgets) gives a graphical demenstration.
+Figure \@ref(fig:widgets) gives a graphical demenstration.
 
 ```{r widgets, fig.cap='Control Widgets.', echo=FALSE}
 knitr::include_graphics('images/widgets.png')
@@ -277,7 +285,7 @@ function(input, output) {
 }
 ```
 
-Now let's run the app in `showcase` mode by calling `runApp(display.mode = "showcase")`. 
+Now let's run the app in `showcase` mode by calling `runApp(display.mode = "showcase")`.
 
 Show case mode will show application code and metadata from a `DESCRIPTION` file in the application directory alongside the application. Shiny showcase will highlight lines of code in `server.R` as it runs them. The highlight will appear in yellow and fade out after a few moments. This helps reveal how Shiny creates **reactivity**; when your user manipulates an app, Shiny reruns parts of `server.R` to create updated output.
 
@@ -296,13 +304,17 @@ tableOutput |	renderTable	| data frame, matrix, other table like structures
 textOutput | renderText |	character strings
 verbatimTextOutput | renderPrint	| any printed output
 
-Figure \@ref(output) gives a graphical demenstration.
+Figure \@ref(fig:output) gives a graphical demenstration.
 
 ```{r output, fig.cap='Shiny `render*` and `*Output` functions', echo=FALSE}
 knitr::include_graphics('images/outputs.png')
 ```
 
-### Summary practice
+```{block, tip1, type='rmdtip'}
+Some people get confused about when to use `,` and when should not use. Actually it is quite easy to remember: when your component is as an argument to a function, you should use `,`, otherwise don't use comma. For example, you put several components inside a `fluidRow`, then you should separate the components by using comma; you put some expression inside `function(input, output){}` in the `server.R` file, then you don't need comma to seperate them as they are in the body of a function.
+```
+
+## More practice
 
 **Exercise 6: A summary of what we have learned**
 
@@ -312,10 +324,5 @@ Create a shiny app named '02-cars' with the following requirements:
 3. In the main panel, create a scatterplot with `x` axis `speed` and `y` axis `dist` on the top and a table showing the data on the bottom, using `outputId` "carsPlot" and "carsTable" respectively.
 
 Solution will be given in next section.
-
-```{block, tip1, type='rmdtip'}
-Some people get confused about when to use `,` and when should not use. Actually it is quite easy to remember: when your component is as an argument to a function, you should use `,`, otherwise don't use comma. For example, you put several components inside a `fluidRow`, then you should separate the components by using comma; you put some expression inside `function(input, output){}` in the `server.R` file, then you don't need comma to seperate them as they are in the body of a function.
-```
-
 
 

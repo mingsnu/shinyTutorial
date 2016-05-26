@@ -1,0 +1,23 @@
+# Tips
+
+1. Get `R` to choose Chrome as the browser when running Shiny apps instead of having to make Chrome the default browser on the user’s system.
+
+```{r, eval=FALSE}
+## If chrome is in the system path
+cat('options(browser="chrome")\n', file = "~/.Rprofile", append=TRUE)
+## Or need to specify the exact path to the executable file
+## cat('options(browser="C:/Program Files (x86)/Mozilla Firefox/firefox.exe")\n', file = "~/.Rprofile", append=TRUE)
+```
+
+2. To allow other clients to connect to your shinyApp:
+
+```{r, eval=FALSE}
+runApp(..., host="0.0.0.0", port=80) # port is optional
+```
+
+3. To display source code together with your Shiny app by using the `display.mode` argument.
+
+```{r, eval=FALSE}
+runApp(display.mode = "showcase")
+```
+

@@ -38,7 +38,7 @@ shinyServer(function(input, output) {
 
 ```
 
-The solution given above works, but not perfect. A better solution would be:
+The solution given above works, but not perfect. A better solution would be to use reactive expression:
 
 ```{r, eval=FALSE}
 shinyServer(function(input, output) {
@@ -54,3 +54,4 @@ shinyServer(function(input, output) {
 })
 ```
 
+- Joe Cheng from Rstudio gave an excellent tutorial on reative programming, follow the link <https://www.rstudio.com/resources/webinars/shiny-developer-conference/> to watch the video and the [here](https://cdn.rawgit.com/rstudio/reactivity-tutorial/master/slides.html) is the slides.

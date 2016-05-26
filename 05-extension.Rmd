@@ -1,0 +1,15 @@
+# Extension
+
+Popular packages in developing Shiny apps:
+
+- [`shinydashboard`](https://rstudio.github.io/shinydashboard/): to create dashboard like UI
+- [`shinythemes`](https://rstudio.github.io/shinythemes/): makes it easy to alter the overall appearance of your Shiny applications 
+- [`shinyjs`](https://github.com/daattali/shinyjs): perform common JavaScript operations in Shiny apps using plain R code
+- [`shinyBS`](https://github.com/ebailey78/shinyBS): adds several additional Twitter Boostrap components to shiny. 
+- [`shinyFiles`](https://github.com/thomasp85/shinyFiles):extends the functionality of shiny by providing an API for client side access to the server file system.
+- [`shinysky`](https://github.com/AnalytixWare/ShinySky): various UI widgets/components not part of Shiny e.g. alerts, styled buttons
+- [`plotly`](https://plot.ly/):  create interactive web-based graphs
+    - <https://plot.ly/r/shiny-tutorial/>
+    - <https://plot.ly/r/shiny-gallery/>
+- [`DT`](https://rstudio.github.io/DT/): provides filtering, pagination, sorting, and many other features in the tables
+- [`leaflet`](https://rstudio.github.io/leaflet/): JavaScript libraries for interactive maps

@@ -1,8 +1,10 @@
 # Introduction {#intro}
 
+In this section, we'll start with some basic concepts of web development and then introduce Shiny by explaining the advantages of Shiny and how it works. At last we'll give a list of useful resources in learning Shiny.
+
 ## Web development
 
-Here are some concepts that usually used in web development. Knowing them might make you look like more professional:sunglasses:
+Here are some concepts that usually used in web development. Knowing them might make you look like more professional:)
 
 **Static web page**
 
@@ -72,16 +74,16 @@ In the example above, the "Server" keeps monitoring the "slider" in the page, an
 ## Resources
 
 1. Shiny portal site: <http://shiny.rstudio.com>
-  - Tutorial (get started): <http://shiny.rstudio.com/tutorial/>
-  - Articles (go deeper): <http://shiny.rstudio.com/articles/>
-  - Gallery (get inspired): <http://shiny.rstudio.com/gallery/>
+    - Tutorial (get started): <http://shiny.rstudio.com/tutorial/>
+    - Articles (go deeper): <http://shiny.rstudio.com/articles/>
+    - Gallery (get inspired): <http://shiny.rstudio.com/gallery/>
 2. Shiny User Showcase: <https://www.rstudio.com/products/shiny/shiny-user-showcase/>
-  - Shiny Apps for the Enterprise
-  - Industry Specific Shiny Apps
-  - Shiny Apps as Analytics Tools
-  - Shiny Apps that Extend Shiny
-  - Shiny Apps with Popular Appeal
-  - Shiny Apps for Teaching
+    - Shiny Apps for the Enterprise
+    - Industry Specific Shiny Apps
+    - Shiny Apps as Analytics Tools
+    - Shiny Apps that Extend Shiny
+    - Shiny Apps with Popular Appeal
+    - Shiny Apps for Teaching
 3. Shiny examples (over 100 examples): <https://github.com/rstudio/shiny-examples>
 4. Ask questions in the shiny google group: <https://groups.google.com/forum/#!forum/shiny-discuss>
 5. Articles from R blogger: <http://www.r-bloggers.com/?s=shiny>
