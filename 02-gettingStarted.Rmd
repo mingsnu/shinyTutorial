@@ -76,7 +76,7 @@ UI is de facto an HTML file.
 In building `ui.R` file, what we really do is to construct an HTML file with R functions. To see so by typing `fluidPage()` in the R console and you'll see this function returns an HTML div tag `<div class="container-fluid"></div>`.
 So of course you can [build your entire UI with HTML](http://shiny.rstudio.com/articles/html-ui.html).
 
-By default, Shiny uses [bootstrap](http://getbootstrap.com/)(has nothing to do with `bootstrap` method in statistics), the most popular HTML, CSS, and JS framework for developing responsive, mobile first projects on the web.
+By default, Shiny uses [bootstrap](http://getbootstrap.com/) (has nothing to do with `bootstrap` method in statistics), the most popular HTML, CSS, and JS framework for developing responsive, mobile first projects on the web.
 
 ### HTML tags
 
